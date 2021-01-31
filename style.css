@@ -1,0 +1,9 @@
+div {
+	font-size: 0.5rem;
+	font-family: 'Courier New', 'sans-serif';
+	font-style: normal;
+	line-height: 0.5rem;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
