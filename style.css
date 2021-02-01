@@ -33,9 +33,14 @@ footer {
 	position: absolute;
 	bottom: 0px;
 	background: #ACDBDF;
-	text-align: right;
+	text-align: center;
 	padding: 20px 25px;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	font-family: 'Inconsolata', monospace;
+	font-size: 1rem;
+	align-items: center;
+}
+
+h1 {
 	font-size: 1rem;
 }
