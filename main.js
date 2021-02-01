@@ -150,7 +150,9 @@ function convertToAscii(arr) {
 
 const constraints = {
   audio: false,
-  video: true,
+  video: {
+	 autoplay: true, 
+  }
 };
 
 function handleSuccess(stream) {
