@@ -86,14 +86,12 @@ function grayScale() {
 		pixels[i+2] = bw;
 	}
 	ctx2.putImageData(imageData, 0, 0);
-	console.log("pix" + "=" + pixels.length);
 	return pixels;
 }
 
 function splitPixels(pixels) {
 	var resX = 4;
 	var resY = 3*(resX/2);
-	//var resY = 2*resX
 	
 	var asciiW = canv2.width / resX;
 	var asciiH = canv2.height / resY;
@@ -102,11 +100,11 @@ function splitPixels(pixels) {
 	
 	for (var y = 0; y < canv2.height; y+= resY) {
 		for (var x = 0; x < canv2.width; x+= resX) {
-			var index = x + y*canv2.width;
-			brightVals[index] = pixels[index*4] / 255;
+			var index = (x/resX) + (y/resY)*asciiW;
+			var i = x + y*canv2.width;
+			brightVals[index] = pixels[i*4] / 255;
 		}
 	}
-	console.log("bvals" + "=" + brightVals.length);
 	return brightVals;
 }
 
@@ -114,11 +112,14 @@ function convertToAscii(arr) {
 	var ascii = "";
 	
 	for (var i = 0; i < arr.length; i++) {
-		
 				
-		if (i % 640 == 0 && i != 0) {
+		if (i % 160 == 0 && i != 0) {
 			ascii += "\n";
 		}
+		
+		//BETTER WAY TO DO THIS, but buggy.
+		//let chars = "@FELlv!;,.";
+		//ascii += chars.charAt(Math.floor(10* arr[i]));
 		
 		if (arr[i] >= 0 && arr[i] < 0.1) {
 			ascii += "@";
@@ -141,18 +142,15 @@ function convertToAscii(arr) {
 		} else if (arr[i] >= 0.9 && arr[i] <= 1.0) {
 			ascii += ".";
 		}
-
-		
-
 	}
-	
+	console.log(arr.length);
+	console.log(ascii.length);
 	return ascii;
-	
 }
 
 const constraints = {
   audio: false,
-  video: true
+  video: true,
 };
 
 function handleSuccess(stream) {
