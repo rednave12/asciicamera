@@ -21,7 +21,7 @@ canvas.height = 360;
 canv2.width = 480;
 canv2.height = 360;
 
-function camToCanvas() {
+async function camToCanvas() {
 	canvas.width = video.videoWidth;
 	canvas.height = video.videoHeight;
 	
@@ -32,14 +32,12 @@ function camToCanvas() {
 	ctx.scale(-1, 1);
 	ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 	
-	window.requestAnimationFrame(camToCanvas);
+	await window.requestAnimationFrame(camToCanvas);
 	
-	let pix = grayScale();
-	let brightVals = splitPixels(pix);
-	let ascii = convertToAscii(brightVals);
+	let pix = await grayScale();
+	let brightVals = await splitPixels(pix);
+	let ascii = await convertToAscii(brightVals);
 	document.querySelector('.ascii').innerHTML = ascii;
-	
-
 }
 
 function grayScale() {
@@ -88,6 +86,7 @@ function grayScale() {
 		pixels[i+2] = bw;
 	}
 	ctx2.putImageData(imageData, 0, 0);
+	console.log("pix" + "=" + pixels.length);
 	return pixels;
 }
 
@@ -107,7 +106,7 @@ function splitPixels(pixels) {
 			brightVals[index] = pixels[index*4] / 255;
 		}
 	}
-	console.log(brightVals.length);
+	console.log("bvals" + "=" + brightVals.length);
 	return brightVals;
 }
 
@@ -115,8 +114,10 @@ function convertToAscii(arr) {
 	var ascii = "";
 	
 	for (var i = 0; i < arr.length; i++) {
-		if (i % 960 == 0) {
-			ascii += " \r";
+		
+				
+		if (i % 640 == 0 && i != 0) {
+			ascii += "\n";
 		}
 		
 		if (arr[i] >= 0 && arr[i] < 0.1) {
@@ -138,8 +139,9 @@ function convertToAscii(arr) {
 		} else if (arr[i] >= 0.8 && arr[i] < 0.9) {
 			ascii += ",";
 		} else if (arr[i] >= 0.9 && arr[i] <= 1.0) {
-			ascii += " ";
+			ascii += ".";
 		}
+
 		
 
 	}
@@ -172,8 +174,4 @@ video.style.display='none';
 canvas.style.display='none';
 canv2.style.display='none';
 navigator.mediaDevices.getUserMedia(constraints).then(handleSuccess).catch(handleError);
-camToCanvas();
-// let pix = grayScale();
-// let brightVals = splitPixels(pix);
-// let ascii = convertToAscii(brightVals);
-// document.querySelector('.ascii').innerHTML = ascii;
+window.requestAnimationFrame(camToCanvas);
