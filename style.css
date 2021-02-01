@@ -1,5 +1,8 @@
-div {
-	padding-top: 10px;
+.ascii {
+	margin: 15px auto;
+	border: 2px inset #CCCCCC;
+	border-radius: 5px;
+	padding: 5px;
 	font-size: 0.45rem;
 	font-family: 'Courier New', 'sans-serif';
 	font-style: normal;
@@ -14,7 +17,6 @@ div {
 }
 
 body {
-	/* box-sizing: border-box; */
 	padding: 0;
 	margin: 0;
 }

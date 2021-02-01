@@ -150,11 +150,6 @@ function convertToAscii(arr) {
 	
 }
 
-//we need to increase the contrast. scale brightness value?
-//FLIP CAMERA
-//GET IMAGE DATA
-//CONVERT PIXELS TO GRAYSCALE...CONSIDER GROUPS OF PIXELS MAYBE
-
 const constraints = {
   audio: false,
   video: true
