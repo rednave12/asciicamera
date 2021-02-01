@@ -1,9 +1,36 @@
 div {
-	font-size: 0.5rem;
+	padding-top: 10px;
+	font-size: 0.45rem;
 	font-family: 'Courier New', 'sans-serif';
 	font-style: normal;
-	line-height: 0.5rem;
+	line-height: 0.45rem;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	/* box-sizing: border-box; */
+	padding: 0;
+	margin: 0;
+}
+
+
+footer {
+	display: flex;
+	box-sizing: border-box;
+	width: 100vw;
+	height: 10vh;
+	position: absolute;
+	bottom: 0;
+	background: #ACDBDF;
+	text-align: right;
+	padding: 20px 25px;
+	justify-content: space-between;
+	font-family: 'Inconsolata', monospace;
+	font-size: 1rem;
 }
