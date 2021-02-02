@@ -21,6 +21,9 @@ canvas.height = 360;
 canv2.width = 480;
 canv2.height = 360;
 
+var resX;
+var resY;
+
 async function camToCanvas() {
 	canvas.width = video.videoWidth;
 	canvas.height = video.videoHeight;
@@ -90,12 +93,11 @@ function grayScale() {
 }
 
 function splitPixels(pixels) {
-	var resX = 4;
-	var resY = 3*(resX/2);
+	resX = 4;
+	resY = 3*(resX/2);
 	
 	var asciiW = canv2.width / resX;
 	var asciiH = canv2.height / resY;
-	
 	var brightVals = Array(asciiW * asciiH);
 	
 	for (var y = 0; y < canv2.height; y+= resY) {
@@ -113,7 +115,7 @@ function convertToAscii(arr) {
 	
 	for (var i = 0; i < arr.length; i++) {
 				
-		if (i % 160 == 0 && i != 0) {
+		if (i % (canv2.width/resX) == 0 && i != 0) {
 			ascii += "\n";
 		}
 		
